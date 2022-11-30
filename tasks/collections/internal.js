@@ -14,9 +14,8 @@ module.exports = function(gulp) {
     fs         = require('fs'),
     chmod      = require('gulp-chmod'),
     concat     = require('gulp-concat'),
-    concatCSS  = require('gulp-concat-css'),
     clone      = require('gulp-clone'),
-    dedupe     = require('gulp-dedupe'),
+    dedupe     = require('@fomantic/gulp-dedupe'),
     gulpif     = require('gulp-if'),
     header     = require('gulp-header'),
     less       = require('gulp-less'),
@@ -55,7 +54,6 @@ module.exports = function(gulp) {
       .pipe(plumber())
       .pipe(dedupe())
       .pipe(replace(assets.uncompressed, assets.packaged))
-      .pipe(concatCSS(filenames.concatenatedCSS, settings.concatCSS))
         .pipe(gulpif(config.hasPermission, chmod(config.permission)))
         .pipe(header(banner, settings.header))
         .pipe(gulp.dest(output.packaged))
@@ -68,7 +66,6 @@ module.exports = function(gulp) {
       .pipe(plumber())
       .pipe(dedupe())
       .pipe(replace(assets.uncompressed, assets.packaged))
-      .pipe(concatCSS(filenames.concatenatedMinifiedCSS, settings.concatCSS))
         .pipe(gulpif(config.hasPermission, chmod(config.permission)))
         .pipe(minifyCSS(settings.concatMinify))
         .pipe(header(banner, settings.header))
@@ -114,7 +111,6 @@ module.exports = function(gulp) {
       return gulp.src(output.uncompressed + '/**/' + globs.components + globs.ignoredRTL + '.rtl.css')
         .pipe(dedupe())
         .pipe(replace(assets.uncompressed, assets.packaged))
-        .pipe(concatCSS(filenames.concatenatedRTLCSS, settings.concatCSS))
           .pipe(gulpif(config.hasPermission, chmod(config.permission)))
           .pipe(header(banner, settings.header))
           .pipe(gulp.dest(output.packaged))
@@ -126,7 +122,6 @@ module.exports = function(gulp) {
       return gulp.src(output.uncompressed + '/**/' + globs.components + globs.ignoredRTL + '.rtl.css')
         .pipe(dedupe())
         .pipe(replace(assets.uncompressed, assets.packaged))
-        .pipe(concatCSS(filenames.concatenatedMinifiedRTLCSS, settings.concatCSS))
           .pipe(gulpif(config.hasPermission, chmod(config.permission)))
           .pipe(minifyCSS(settings.concatMinify))
           .pipe(header(banner, settings.header))
@@ -140,7 +135,6 @@ module.exports = function(gulp) {
         .pipe(dedupe())
         .pipe(plumber())
         .pipe(replace(assets.uncompressed, assets.packaged))
-        .pipe(concatCSS(filenames.concatenatedCSS, settings.concatCSS))
           .pipe(gulpif(config.hasPermission, chmod(config.permission)))
           .pipe(gulp.dest(output.packaged))
           .pipe(print(log.created))
@@ -152,7 +146,6 @@ module.exports = function(gulp) {
         .pipe(dedupe())
         .pipe(plumber())
         .pipe(replace(assets.uncompressed, assets.packaged))
-        .pipe(concatCSS(filenames.concatenatedMinifiedCSS, settings.concatCSS))
           .pipe(minifyCSS(settings.concatMinify))
           .pipe(header(banner, settings.header))
           .pipe(gulpif(config.hasPermission, chmod(config.permission)))
@@ -176,7 +169,6 @@ module.exports = function(gulp) {
       .pipe(dedupe())
       .pipe(plumber())
       .pipe(replace(assets.uncompressed, assets.packaged))
-      .pipe(concatCSS(filenames.concatenatedCSS, settings.concatCSS))
         .pipe(gulpif(config.hasPermission, chmod(config.permission)))
         .pipe(gulp.dest(docsOutput.packaged))
         .pipe(print(log.created))
@@ -188,7 +180,6 @@ module.exports = function(gulp) {
       .pipe(dedupe())
       .pipe(plumber())
       .pipe(replace(assets.uncompressed, assets.packaged))
-      .pipe(concatCSS(filenames.concatenatedMinifiedCSS, settings.concatCSS))
         .pipe(minifyCSS(settings.concatMinify))
         .pipe(header(banner, settings.header))
         .pipe(gulpif(config.hasPermission, chmod(config.permission)))

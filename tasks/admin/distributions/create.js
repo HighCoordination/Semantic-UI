@@ -22,7 +22,6 @@ let
   path            = require('path'),
 
   // admin dependencies
-  concatFileNames = require('gulp-concat-filenames'),
   debug           = require('gulp-debug'),
   flatten         = require('gulp-flatten'),
   git             = require('gulp-git'),

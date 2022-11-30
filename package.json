@@ -17,6 +17,7 @@
     "install": "gulp install"
   },
   "peerDependencies": {
+    "@fomantic/gulp-dedupe": "*",
     "better-console": "*",
     "del": "*",
     "extend": "*",
@@ -26,9 +27,7 @@
     "gulp-clean-css": "*",
     "gulp-clone": "*",
     "gulp-concat": "*",
-    "gulp-concat-css": "*",
     "gulp-copy": "*",
-    "gulp-dedupe": "*",
     "gulp-flatten": "*",
     "gulp-header": "*",
     "gulp-if": "*",
@@ -46,7 +45,9 @@
     "yamljs": "*"
   },
   "dependencies": {
+    "@fomantic/gulp-dedupe": "*",
     "better-console": "*",
+    "del": "*",
     "extend": "*",
     "gulp": "*",
     "gulp-autoprefixer": "*",
@@ -54,9 +55,7 @@
     "gulp-clean-css": "*",
     "gulp-clone": "*",
     "gulp-concat": "*",
-    "gulp-concat-css": "*",
     "gulp-copy": "*",
-    "gulp-dedupe": "*",
     "gulp-flatten": "*",
     "gulp-header": "*",
     "gulp-if": "*",
@@ -77,18 +76,19 @@
     "replace-ext": "*",
     "require-dot-file": "*",
     "wrench-sui": "^0.0.3",
-    "yamljs": "*",
-    "del": "*"
+    "yamljs": "*"
   },
   "devDependencies": {
     "@jsdevtools/npm-publish": "^1.4.3",
     "@octokit/rest": "^19.0.4",
-    "del": "6.1",
-    "gulp-concat-filenames": "*",
+    "glob-parent": "^6.0.2",
     "gulp-debug": "^4.0.0",
     "gulp-git": "^2.10.1",
     "gulp-tap": "^2.0.0",
     "merge-stream": "*"
+  },
+  "overrides": {
+    "glob-parent": "^6.0.2"
   },
   "style": "dist/semantic.css"
 }

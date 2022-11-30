@@ -25,7 +25,6 @@ let
   path            = require('path'),
 
   // admin dependencies
-  concatFileNames = require('gulp-concat-filenames'),
   debug           = require('gulp-debug'),
   flatten         = require('gulp-flatten'),
   git             = require('gulp-git'),
@@ -279,42 +278,6 @@ for(index in release.components) {
       ;
     };
 
-    // Creates meteor package.js
-    let meteorTask = function() {
-      console.info('Handling meteor release');
-      let
-        filenames = ''
-      ;
-      return gulp.src(manifest.component)
-        .pipe(concatFileNames('empty.txt', concatSettings))
-        .pipe(tap(function(file) {
-          filenames += file.contents;
-        }))
-        .on('end', function() {
-          gulp.src(manifest.assets)
-            .pipe(concatFileNames('empty.txt', concatSettings))
-            .pipe(tap(function(file) {
-              filenames += file.contents;
-            }))
-            .on('end', function() {
-              // remove trailing slash
-              filenames = filenames.replace(regExp.match.trailingComma, '').trim();
-              gulp.src(release.templates.meteor.component)
-                .pipe(plumber())
-                .pipe(flatten())
-                .pipe(replace(regExp.match.name, regExp.replace.name))
-                .pipe(replace(regExp.match.titleName, regExp.replace.titleName))
-                .pipe(replace(regExp.match.version, version))
-                .pipe(replace(regExp.match.files, filenames))
-                .pipe(rename(release.files.meteor))
-                .pipe(gulp.dest(outputDirectory))
-              ;
-            })
-          ;
-        })
-      ;
-    };
-
     tasks.push(repoTask);
     tasks.push(npmTask);
     tasks.push(readmeTask);
@@ -322,7 +285,6 @@ for(index in release.components) {
     tasks.push(packageTask);
     tasks.push(composeTask);
     tasks.push(releateNotesTask);
-    tasks.push(meteorTask);
 
   })(component);
 }
